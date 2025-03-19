@@ -2,7 +2,6 @@ using UnityEngine;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using TMPro;
-using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerHealth : NetworkBehaviour
 {
@@ -11,21 +10,17 @@ public class PlayerHealth : NetworkBehaviour
     [SerializeField]
     private float healthValue;
 
+    //private TMP_Text guiHealthText;
+
     public TMP_Text healthText;
 
-    public override void OnStartClient()
-    {
-        base.OnStartClient();
-
-        if (!IsOwner)
-        {
-            GetComponent<PlayerHealth>().enabled = false;
-        }
-    }
+    private float amount = 1;
 
     private void Awake()
     {
         health.OnChange += OnHealthChanged;
+
+        //guiHealthText = GameObject.FindGameObjectWithTag("HealthText").GetComponent<TMP_Text>();
     }
 
     private void Start()
@@ -36,15 +31,20 @@ public class PlayerHealth : NetworkBehaviour
     private void OnHealthChanged(float oldValue, float newValue, bool asServer)
     {
         UpdateHealthUI(newValue);
+        //Debug
+        healthValue = newValue;
     }
 
     private void Update()
     {
+        if (!IsOwner)
+            return;
+
         if(Input.GetKeyDown(KeyCode.Alpha3))
-            LoseHealth();
+            LoseHealth(amount);
 
         if (Input.GetKeyDown(KeyCode.Alpha4) && health.Value < 10)
-            GainHealth();
+            GainHealth(amount);
     }
 
     private void UpdateHealthUI(float value)
@@ -52,19 +52,20 @@ public class PlayerHealth : NetworkBehaviour
         if (healthText != null)
         {
             healthText.text = $"Health: {value}";
+            //guiHealthText.text = value.ToString();
         }
     }
 
-    [ServerRpc]
-    private void LoseHealth()
+    [ObserversRpc]
+    public void LoseHealth(float amount)
     {
-        health.Value--;
+        health.Value -= amount;
     }
 
-    [ServerRpc]
-    private void GainHealth()
+    [ObserversRpc]
+    public void GainHealth(float amount)
     {
-        health.Value++;
+        health.Value += amount;
     }
 
     private void OnDestroy()

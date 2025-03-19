@@ -280,12 +280,13 @@ GameObject:
   - component: {fileID: 8158408417188510471}
   - component: {fileID: 1464672526470510377}
   - component: {fileID: 4343661990866395453}
+  - component: {fileID: -7997488101002465867}
   - component: {fileID: 2332698215827526451}
   - component: {fileID: 821120830179350728}
   - component: {fileID: 8522425284179093810}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -509,6 +510,24 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 2332698215827526451}
   healthValue: 10
   healthText: {fileID: 4025452823558238774}
+--- !u!114 &-7997488101002465867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7491391931832313331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e035983143fbdb9488cb55b04755c075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 4
+  _addedNetworkObject: {fileID: 2332698215827526451}
+  _networkObjectCache: {fileID: 2332698215827526451}
+  damage: 2
+  timeBetweenShots: 0.5
+  rayColor: {r: 0, g: 0.27044016, b: 0.024663206, a: 0}
 --- !u!114 &2332698215827526451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,6 +549,7 @@ MonoBehaviour:
   - {fileID: 8158408417188510471}
   - {fileID: 1464672526470510377}
   - {fileID: 4343661990866395453}
+  - {fileID: -7997488101002465867}
   - {fileID: 821120830179350728}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
@@ -576,7 +596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 4
+  _componentIndexCache: 5
   _addedNetworkObject: {fileID: 2332698215827526451}
   _networkObjectCache: {fileID: 2332698215827526451}
   _componentConfiguration: 2
